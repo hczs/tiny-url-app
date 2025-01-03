@@ -1,0 +1,28 @@
+spring:
+  # database info
+  r2dbc:
+    url: r2dbc:mysql://ip:port/tiny_url?useSSL=false
+    username:
+    password:
+    pool:
+      initial-size: 5
+      max-size: 20
+      max-idle-time: 30m
+
+  # redis
+  data:
+    redis:
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 8
+          max-idle: 8
+          min-idle: 1
+      host:
+      port:
+      password:
+
+tiny-url-app:
+  # reference fun.powercheng.url.tiny.enums.ShortenerTypeEnum
+  shortener-type: UNIQUE_ID_WITH_BASE62
+  worker-id: 0

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Console Appender: 输出日志到控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Spring Profile: production settings -->
+    <springProfile name="prod">
+
+        <!-- Rolling File Appender: 输出日志到文件，按天滚动 -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/application.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 日志文件按天滚动 -->
+                <fileNamePattern>${LOG_PATH}/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory> <!-- 最多保留30天的日志 -->
+                <totalSizeCap>5GB</totalSizeCap> <!-- 日志文件总大小上限 -->
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <!-- 异步日志配置：避免日志对WebFlux性能的影响 -->
+        <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+            <appender-ref ref="FILE"/>
+        </appender>
+
+        <!-- 根日志级别 -->
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_FILE"/>
+        </root>
+
+        <!-- WebFlux相关日志配置 -->
+        <logger name="org.springframework.web.reactive" level="info"/>
+        <logger name="reactor.netty" level="warn"/>
+        <logger name="org.springframework.boot" level="info"/>
+        <logger name="org.springframework" level="warn"/>
+
+        <!-- R2DBC相关日志配置 -->
+        <logger name="io.r2dbc.spi" level="debug"/> <!-- R2DBC SPI层日志 -->
+        <logger name="org.springframework.data.r2dbc.core" level="debug"/> <!-- Spring Data R2DBC日志 -->
+
+    </springProfile>
+
+    <!-- 开发环境配置（调试日志） -->
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="fun.powercheng.url.tiny" level="debug"/>
+    </springProfile>
+
+</configuration>

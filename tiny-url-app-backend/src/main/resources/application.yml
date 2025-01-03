@@ -1,0 +1,11 @@
+spring:
+  # app name
+  application:
+    name: tiny-url-app-backend
+
+  profiles:
+    active: dev
+
+logging:
+  file:
+    name: ${LOG_PATH:.}/application.log
