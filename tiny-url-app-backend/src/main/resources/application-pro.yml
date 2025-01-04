@@ -1,9 +1,9 @@
 spring:
   # database info
   r2dbc:
-    url: r2dbc:mysql://ip:port/tiny_url?useSSL=false
-    username:
-    password:
+    url: r2dbc:mysql://127.0.0.1:3306/tiny_url?useSSL=false
+    username: root
+    password: xxx
     pool:
       initial-size: 5
       max-size: 20
@@ -18,11 +18,15 @@ spring:
           max-active: 8
           max-idle: 8
           min-idle: 1
-      host:
-      port:
-      password:
+      host: 127.0.0.1
+      port: 6379
+      password: xxx
 
 tiny-url-app:
   # reference fun.powercheng.url.tiny.enums.ShortenerTypeEnum
   shortener-type: UNIQUE_ID_WITH_BASE62
-  worker-id: 0
+  worker-id: 1
+  # global cache config
+  cache-config:
+    cache-duration: 7
+    duration-unit: days
