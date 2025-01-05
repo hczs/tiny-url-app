@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 /**
+ * 雪花ID生成器初始化配置
+ * <br>
  * Created by PowerCheng on 2024/12/29.
  */
 @Slf4j
