@@ -32,9 +32,9 @@ public class CacheConfig {
     public void init() throws ConfigurationException {
         if (cacheDuration == null && durationUnit == null) {
             log.warn("检测到未配置 [tiny-url-app.cache-config.cache-duration] 和 [tiny-url-app.cache-config.duration-unit] " +
-                    " 将使用默认值 7 days");
-            cacheDuration = 7L;
-            durationUnit = ChronoUnit.DAYS;
+                    " 将使用默认值 3 Hours");
+            cacheDuration = 3L;
+            durationUnit = ChronoUnit.HOURS;
         } else if (cacheDuration == null || durationUnit == null) {
             log.error("[tiny-url-app.cache-config.cache-duration] 和 [tiny-url-app.cache-config.duration-unit] 两个配置项" +
                     "必须同时设置");

@@ -1,9 +1,12 @@
 package fun.powercheng.url.tiny.core;
 
+import fun.powercheng.url.tiny.model.bo.UrlShortenerResult;
+import reactor.core.publisher.Mono;
+
 /**
  * Created by PowerCheng on 2024/12/29.
  */
 public interface UrlShortener {
 
-    String shorten(String url);
+    Mono<UrlShortenerResult> shorten(String url);
 }

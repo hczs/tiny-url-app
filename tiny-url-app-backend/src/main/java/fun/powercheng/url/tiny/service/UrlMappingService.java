@@ -22,4 +22,5 @@ public interface UrlMappingService {
      * @return 短网址编码
      */
     Mono<String> generateUrlMapping(String originalUrl);
+
 }
