@@ -24,9 +24,9 @@ spring:
 
 tiny-url-app:
   # reference fun.powercheng.url.tiny.enums.ShortenerTypeEnum
-  shortener-type: UNIQUE_ID_WITH_BASE62
+  shortener-type: MURMUR32_WITH_BASE62
   worker-id: 1
   # global cache config
   cache-config:
-    cache-duration: 7
-    duration-unit: days
+    cache-duration: 3
+    duration-unit: hours
