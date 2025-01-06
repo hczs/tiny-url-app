@@ -20,7 +20,9 @@ jobs:
           
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file ./tiny-url-app-backend/docker/Dockerfile --tag hsunnyc/tiny-url-app-backend:latest
+      run: |
+          cd ./tiny-url-app-backend
+          docker build . --file ./docker/Dockerfile --tag hsunnyc/tiny-url-app-backend:latest
 
     - name: Push the Docker image
       run: docker push hsunnyc/tiny-url-app-backend:latest
