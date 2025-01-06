@@ -25,6 +25,7 @@ spring:
 tiny-url-app:
   # reference fun.powercheng.url.tiny.enums.ShortenerTypeEnum
   shortener-type: MURMUR32_WITH_BASE62
+  # 如果用 UNIQUE_ID_WITH_BASE62 必须配置 worker id
   worker-id: 1
   # global cache config
   cache-config:
