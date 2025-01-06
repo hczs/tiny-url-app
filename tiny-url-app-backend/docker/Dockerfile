@@ -16,7 +16,7 @@ COPY ../src ./src
 # 打包
 RUN mvn clean package -DskipTests
 # aot
-RUN mvn spring-boot:process-aot
+RUN mvn spring-boot:process-aot -DskipTests
 # native image
 RUN mvn native:compile
 
