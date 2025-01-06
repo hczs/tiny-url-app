@@ -18,7 +18,7 @@ RUN mvn clean package -DskipTests
 # aot
 RUN mvn spring-boot:process-aot -DskipTests
 # native image
-RUN mvn native:compile
+RUN mvn native:compile -DskipTests
 
 # 阶段二 构建运行镜像
 # https://github.com/quarkusio/quarkus/issues/32045
