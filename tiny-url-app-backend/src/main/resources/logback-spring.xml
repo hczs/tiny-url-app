@@ -13,11 +13,11 @@
 
         <!-- Rolling File Appender: 输出日志到文件，按天滚动 -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>${LOG_PATH}/application.log</file>
+            <file>./log/tiny-url-app.log</file>
 
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- 日志文件按天滚动 -->
-                <fileNamePattern>${LOG_PATH}/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>./log/tiny-url-app.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <maxHistory>30</maxHistory> <!-- 最多保留30天的日志 -->
                 <totalSizeCap>5GB</totalSizeCap> <!-- 日志文件总大小上限 -->
             </rollingPolicy>
@@ -34,7 +34,6 @@
 
         <!-- 根日志级别 -->
         <root level="info">
-            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="ASYNC_FILE"/>
         </root>
 
