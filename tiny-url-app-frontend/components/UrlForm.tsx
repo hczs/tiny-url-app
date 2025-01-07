@@ -68,7 +68,7 @@ const UrlForm = () => {
                 <div className="mt-4">
                     <Label className="text-lg font-medium mb-2">生成的短网址</Label>
                     <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
-                        <span>{shortUrl}</span>
+                        <span className="break-all">{shortUrl}</span>
                         <Button onClick={() => {
                             navigator.clipboard.writeText(shortUrl)
                             toast({
