@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 import static fun.powercheng.url.tiny.util.ProjectConstants.HASH_SUFFIX_VALUE;
 
 /**
@@ -35,11 +33,8 @@ public class UrlMappingServiceImpl implements UrlMappingService {
     public Mono<String> getUrlByShortCode(String shortCode) {
         return redisTemplate.getValue(shortCode)
                 .doOnSuccess(res -> log.debug("短链缓存查询结果：shortCode: {} res: {}", shortCode, res))
-
-                .flatMap(res ->
-                        Optional.ofNullable(res)
-                                .map(Mono::just)
-                                .orElseGet(() -> findOriginalUrlAndCache(shortCode)));
+                .flatMap(Mono::just)
+                .switchIfEmpty(Mono.defer(() -> findOriginalUrlAndCache(shortCode)));
     }
 
     @Override

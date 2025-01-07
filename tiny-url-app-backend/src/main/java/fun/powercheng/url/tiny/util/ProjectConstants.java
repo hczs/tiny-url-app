@@ -10,7 +10,7 @@ public class ProjectConstants {
 
     public static final String REDIS_KEY_APP_PREFIX = "tiny:";
 
-    public static final String NOT_FOUND_404 = "404";
+    public static final String NOT_FOUND_404 = "URL_IS_NOT_FOUND";
 
     /**
      * 哈希碰撞后添加的额外后缀
