@@ -2,7 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - 'tiny-url-app-backend/**'
 
 jobs:
 
