@@ -26,7 +26,7 @@ const UrlForm = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                setShortUrl(window.location.href + "api/v1/" + data.shortUrl);
+                setShortUrl(window.location.href + data.shortUrl);
                 toast({
                     description: "成功生成短网址！",
                 });
