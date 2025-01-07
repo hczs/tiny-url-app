@@ -82,9 +82,9 @@ public class Murmur32WithBase62Shortener implements UrlShortener {
                                         .build());
                             })
                             // 若 redis 中为空 先查库
-                            .switchIfEmpty(queryDb(shortCode))
+                            .switchIfEmpty(Mono.defer(() -> queryDb(shortCode)))
                             // 库中也不存在 就是哈希碰撞 添加后缀重新生成短链
-                            .switchIfEmpty(handleHashCollision(url, shortCode));
+                            .switchIfEmpty(Mono.defer(() -> handleHashCollision(url, shortCode)));
                 });
     }
 
