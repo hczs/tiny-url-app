@@ -12,6 +12,8 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static fun.powercheng.url.tiny.util.ProjectConstants.NOT_FOUND_404;
+
 /**
  * Created by PowerCheng on 2024/12/28.
  */
@@ -33,6 +35,10 @@ public class UrlMappingController {
     public Mono<Void> getUrl(@PathVariable String shortCode, ServerWebExchange exchange) {
         return urlMappingService.getUrlByShortCode(shortCode)
                 .flatMap(originalUrl -> {
+                    if (NOT_FOUND_404.equals(originalUrl)) {
+                        exchange.getResponse().setStatusCode(HttpStatus.NOT_FOUND);
+                        return exchange.getResponse().setComplete();
+                    }
                     exchange.getResponse().setStatusCode(HttpStatus.FOUND);
                     exchange.getResponse().getHeaders().setLocation(URI.create(originalUrl));
                     return exchange.getResponse().setComplete();
