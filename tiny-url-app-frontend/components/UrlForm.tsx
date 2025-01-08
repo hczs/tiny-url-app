@@ -13,8 +13,47 @@ const UrlForm = () => {
     const [loading, setLoading] = useState(false);
     const {toast} = useToast()
 
+    const copyToClipboard = (text: string) => {
+        if (navigator.clipboard) {
+            // 使用 clipboard API（HTTPS 环境下）
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    toast({
+                        description: "已复制到剪切板",
+                    });
+                })
+                .catch((err) => {
+                    console.error("无法复制到剪切板", err);
+                    toast({
+                        variant: "destructive",
+                        description: "复制失败，请重试",
+                    });
+                });
+        } else {
+            // 使用 execCommand（非 HTTPS 环境下）
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                toast({
+                    description: "已复制到剪切板",
+                });
+            } catch (err) {
+                console.error("无法复制到剪切板", err);
+                toast({
+                    variant: "destructive",
+                    description: "复制失败，请重试",
+                });
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+    };
+
     const isValidUrl = (url: string) => {
-        const regex = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z0-9]{2,}(\/\S*)?$/i;
+        const regex = /^(https?:\/\/)?(([a-z0-9-]+\.)+[a-z0-9]{2,}|(\d{1,3}\.){3}\d{1,3})(:\d+)?(\/\S*)?$/i;
         return regex.test(url);
     };
 
@@ -89,11 +128,8 @@ const UrlForm = () => {
                     <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
                         <span className="break-all">{shortUrl}</span>
                         <Button onClick={() => {
-                            navigator.clipboard.writeText(shortUrl)
-                            toast({
-                                description: "已复制到剪切板",
-                            })
-                        }} className="ml-4">
+                            copyToClipboard(shortUrl)
+                        }} className="ml-4 active:scale-95 active:shadow-lg transition-all duration-200">
                             复制
                         </Button>
                     </div>
