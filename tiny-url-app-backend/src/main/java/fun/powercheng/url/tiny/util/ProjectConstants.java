@@ -21,4 +21,9 @@ public class ProjectConstants {
      * 判断哈希碰撞的布隆过滤器
      */
     public static final String BLOOM_FILTER_HASH = "bloomfilter:hash";
+
+    /**
+     * 为没有协议头的 url 添加上默认的 http 协议头
+     */
+    public static final String DEFAULT_HTTP_PROTOCOL = "http://";
 }

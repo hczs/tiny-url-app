@@ -1,5 +1,6 @@
 package fun.powercheng.url.tiny.service;
 
+import fun.powercheng.url.tiny.model.vo.UrlShortenResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -21,6 +22,6 @@ public interface UrlMappingService {
      * @param originalUrl 原始网址
      * @return 短网址编码
      */
-    Mono<String> generateUrlMapping(String originalUrl);
+    Mono<UrlShortenResponse> generateUrlMapping(String originalUrl);
 
 }

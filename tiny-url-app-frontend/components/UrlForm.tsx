@@ -13,8 +13,21 @@ const UrlForm = () => {
     const [loading, setLoading] = useState(false);
     const {toast} = useToast()
 
+    const isValidUrl = (url: string) => {
+        const regex = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z0-9]{2,}(\/\S*)?$/i;
+        return regex.test(url);
+    };
 
     const generateShortUrl = async () => {
+
+        if (!isValidUrl(longUrl)) {
+            toast({
+                variant: "destructive",
+                description: "请输入有效的网址！",
+            });
+            return;
+        }
+
         try {
             setLoading(true);
             const response = await fetch('/api/v1/data/shorten', {
@@ -24,16 +37,22 @@ const UrlForm = () => {
                 },
                 body: JSON.stringify({longUrl: longUrl}),
             });
+            const data = await response.json();
             if (response.ok) {
-                const data = await response.json();
+                setLongUrl(data.addedProtocolUrl);
                 setShortUrl(window.location.href + data.shortUrl);
                 toast({
                     description: "成功生成短网址！",
                 });
+            } else if (response.status === 400){
+                toast({
+                    variant: "destructive",
+                    description: data.message,
+                });
             } else {
                 toast({
                     variant: "destructive",
-                    description: "响应异常，状态码：" + response.status,
+                    description: "服务异常！",
                 });
             }
         } catch (error) {

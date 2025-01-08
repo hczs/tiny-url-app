@@ -27,8 +27,16 @@ public class UrlMappingController {
     @PostMapping("/data/shorten")
     public Mono<ResponseEntity<UrlShortenResponse>> shorten(@RequestBody UrlShortenRequest urlShortenRequest) {
         return urlMappingService.generateUrlMapping(urlShortenRequest.getLongUrl())
-                .map(shortUrl -> ResponseEntity.status(HttpStatus.OK)
-                        .body(UrlShortenResponse.builder().shortUrl(shortUrl).build()));
+                .map(shortenResponse -> ResponseEntity.status(HttpStatus.OK).body(shortenResponse))
+                .onErrorResume(error -> {
+                    if (error instanceof IllegalArgumentException) {
+                        return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(UrlShortenResponse.builder().message(error.getMessage()).build())
+                        );
+                    }
+                    return Mono.error(error);
+                })
+                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
     @GetMapping("/{shortCode}")
