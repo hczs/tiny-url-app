@@ -1,16 +1,16 @@
 # 短网址生成器（Tiny Url App）
 ![cheng-tiny-url-web-app](https://github.com/user-attachments/assets/d26d18ca-5608-4dd2-a021-9d52617583c7)
-# 主要特性
+## 主要特性
 - 提供两种网址缩短方案，可根据需要自行选择：
   - 分布式唯一ID + Base62：短编码最长到 9 位，常规长度在 8 位，优势生成简单快速，劣势就是短编码 8 位，会稍微长一点
   - MurMurHash3 32 位 + Base62：短编码长度稳定在 6 位，优势是短编码足够短，但是需要额外操作，使用布隆过滤器处理哈希碰撞问题
 - 提供了一套简单易用的 UI 界面
 - 部署简单：后端部署可以直接 Docker 一键部署启动，前端可以直接 Vercel 部署，如果有自己域名可以配置，还免去了申请 SSL 证书、网站备案等繁琐操作
 - 性能强劲：使用 GraaLVM Native Image 打包方式，项目启动时间仅 0.29 秒；使用 Spring WebFlux 框架，应用有更优秀的并发性能
-# 体验站点
+## 体验站点
 - Vercel 站点：https://tiny.powercheng.fun/
-# 程序部署
-## 后端部署
+## 程序部署
+### 后端部署
 环境说明：
 - Docker: Docker version 25.0.5
 - MySQL: MySQL 8.4.3 并自行创建 tiny_url 库，执行初始化脚本 tiny-url-app-backend/src/main/resources/sql/t_url_mapping.sql
@@ -62,7 +62,7 @@ tiny-url-app:
 ```shell
 docker run -d -p 8080:8080  -v ./config:/config -v ./log:/app/log hsunnyc/tiny-url-app-backend
 ```
-## 前端部署
+### 前端部署
 首先 fork 本项目
 
 访问 Vercel 平台：https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme
