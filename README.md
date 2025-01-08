@@ -9,6 +9,7 @@
 - 性能强劲：使用 GraaLVM Native Image 打包方式，项目启动时间仅 0.29 秒；使用 Spring WebFlux 框架，应用有更优秀的并发性能
 ## 体验站点
 - Vercel 站点：https://tiny.powercheng.fun/
+- 国内站点：http://101.126.68.192:31006/
 ## 程序部署
 ### 后端部署
 环境说明：
