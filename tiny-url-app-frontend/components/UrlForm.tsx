@@ -83,7 +83,7 @@ const UrlForm = () => {
                 toast({
                     description: "成功生成短网址！",
                 });
-            } else if (response.status === 400){
+            } else if (response.status === 400) {
                 toast({
                     variant: "destructive",
                     description: data.message,
@@ -118,7 +118,7 @@ const UrlForm = () => {
                 className="mb-4 p-2 w-full border border-gray-300 rounded"
                 placeholder="https://example.com"
             />
-            <Button loading={loading} onClick={generateShortUrl} disabled={!longUrl} className="w-full">
+            <Button loading={loading} onClick={generateShortUrl} disabled={!longUrl || loading} className="w-full">
                 {loading ? <span>短网址生成中，请等待...</span> : <span>生成短网址</span>}
             </Button>
 
@@ -129,7 +129,8 @@ const UrlForm = () => {
                         <span className="break-all">{shortUrl}</span>
                         <Button onClick={() => {
                             copyToClipboard(shortUrl)
-                        }} className="ml-4 active:scale-95 active:shadow-lg transition-all duration-200">
+                        }} className="ml-4 active:scale-95 active:shadow-md hover:scale-105 hover:shadow-lg
+                         transition-all duration-200 ease-in-out  shadow-sm">
                             复制
                         </Button>
                     </div>
