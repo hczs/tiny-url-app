@@ -8,7 +8,7 @@
 - 部署简单：后端部署可以直接 Docker 一键部署启动，前端可以直接 Vercel 部署，如果有自己域名可以配置，还免去了申请 SSL 证书、网站备案等繁琐操作
 - 性能强劲：使用 GraaLVM Native Image 打包方式，项目启动时间仅 0.29 秒；使用 Spring WebFlux 框架，应用有更优秀的并发性能
 ## 体验站点
-- Vercel 站点：https://tiny.powercheng.fun/
+- Vercel 站点：https://tiny-url-app.vercel.app/
 - 国内站点：http://101.126.68.192:31006/
 ## 程序部署
 ### 后端部署
